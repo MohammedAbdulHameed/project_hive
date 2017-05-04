@@ -1,0 +1,7 @@
+first create a view of having this values
+
+create view query5 as select job_title,year,count(*) as total from projectdata where year in ('2011','2012','2013','2014','2015','2016') group by year,job_title sort by year,total desc;
+
+next run this command to get values of query
+
+ select year,job_title,total,rank from(select year,job_title,rank() over (partition by year order by total desc) as rank,total from query5) ranked_table where ranked_table.rank <=5;

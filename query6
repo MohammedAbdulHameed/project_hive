@@ -1,0 +1,9 @@
+ create view total1 as select year,count(case_status)  as total1 from h1b_final group by year;
+
+create view casecount1 as select case_status,count(case_status) as total,year from h1b_final group by case_status,year order by year;
+
+
+
+
+select a.year,b.case_status,(b.total/a.total1)*100 as percentage from total1 a,casecount1 b where a.year = b.year;
+
